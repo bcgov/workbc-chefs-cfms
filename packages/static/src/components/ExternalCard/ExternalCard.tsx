@@ -42,7 +42,7 @@ const ExternalCard = () => {
                             <Box display="flex" height="100%" justifyContent="center" alignItems="center">
                                 <img
                                     width="250em"
-                                    src="/employer.svg"
+                                    src="/user.svg"
                                     alt=""
                                     style={{ transform: "translate(0.0em, -0.75em)" }}
                                 />
@@ -54,7 +54,7 @@ const ExternalCard = () => {
                     <Box display="flex" height="100%" justifyContent="center" alignItems="end" sx={{ flexGrow: 1 }}>
                         <BCGovPrimaryButton
                             text="Project Holder Login"
-                            onClick={() => window.open(import.meta.env.VITE_EMPLOYER_URL, "_self")}
+                            onClick={() => window.open(import.meta.env.VITE_EXTERNAL_URL, "_self")}
                         />
                     </Box>
                 </Grid>
@@ -67,8 +67,7 @@ const ExternalCard = () => {
                     <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx">
                         Business BCeID
                     </a>
-                    &nbsp;if you would like to view and <strong>share applications</strong> and
-                    <strong> claim forms within your organization.</strong>
+                    &nbsp;if you would like to view and <strong>share applications</strong> within your organization.
                 </p>
                 <p>
                     Note that if you are starting a new Business BCeID registration, it can take some time to verify
@@ -94,12 +93,12 @@ const ExternalCard = () => {
                     <a href="https://www.bceid.ca/register/basic/account_details.aspx?type=regular&eServiceType=basic">
                         Basic BCeID
                     </a>
-                    , you will be able to log in to CEP Intake to submit and view your own applications and claim forms.
+                    , you will be able to log in to CEP Intake to submit and view your own applications.
                 </p>
                 <p>
-                    Note that you will <strong>not</strong> be able to share applications and claim forms with others if
-                    you are using a Basic BCeID; only Business BCeID users will be able to share these forms with those
-                    within their own organization.
+                    Note that you will <strong>not</strong> be able to share applications with others if you are using a
+                    Basic BCeID; only Business BCeID users will be able to share these forms with those within their own
+                    organization.
                 </p>
                 <p>
                     For <a href="https://www.bceid.ca/">more information</a> and&nbsp;
