@@ -8,7 +8,7 @@ import * as userService from "../services/user.service"
 import * as formService from "../services/form.service"
 import * as geocoderService from "../services/geocoder.service"
 import * as emailController from "./email.controller"
-import { maskAddress, maskID } from "../utils/logging"
+import { maskAddress } from "../utils/logging"
 
 export const getAllApplications = async (req: any, res: express.Response) => {
     try {
@@ -66,38 +66,17 @@ export const createApplication = async (req: any, res: express.Response) => {
             return res.status(403).send("Forbidden")
         }
 
-        // Prepare pre-fill data.
-        const user = await userService.getUserByID(bceid_guid)
-        if (!user || user?.id !== bceid_guid) {
-            return res.status(403).send("Forbidden")
-        }
-        const prefillFields = await computeApplicationPrefillFields(user)
-
-        // Create a new form draft //
-        const formID = applicationService.getFormId(req.body.formType)
-        const formVersionID = applicationService.getFormVersionId(req.body.formType)
-        const createDraftResult = await formService.createLoginProtectedDraft(
-            req.kauth.grant.access_token,
-            formID,
-            formVersionID,
+        const insertResult = await insertApplication(
             req.body.formKey,
-            prefillFields
+            req.body.guid,
+            req.body.formType,
+            "",
+            req.kauth.grant.access_token.content.idp,
+            req.kauth.grant.access_token.content.idp_username
         )
-        if (createDraftResult?.id) {
-            const insertResult = await insertApplication(
-                req.body.formKey,
-                req.body.guid,
-                req.body.formType,
-                createDraftResult.id,
-                req.kauth.grant.access_token.content.idp,
-                req.kauth.grant.access_token.content.idp_username
-            )
-            if (insertResult?.rowCount === 1) {
-                // successful insertion
-                return res.status(200).send({ recordId: req.body.formKey })
-            }
-        } else {
-            return res.status(500).send("Internal Server Error")
+        if (insertResult?.rowCount === 1) {
+            // successful insertion
+            return res.status(200).send({ recordId: req.body.formKey })
         }
         return res.status(500).send("Internal Server Error")
     } catch (e: any) {
@@ -380,105 +359,5 @@ export const markApplication = async (req: any, res: express.Response) => {
     } catch (e: any) {
         console.log(e?.message)
         return res.status(500).send("Internal Server Error")
-    }
-}
-
-const computeApplicationPrefillFields = async (user: any) => {
-    if (!user) {
-        return null
-    }
-
-    // check if address(s) are valid before prefilling //
-    if (user.street_address && user.city && user.province) {
-        const businessAddressValidation = await geocoderService.geocodeAddress(
-            user.street_address,
-            user.city,
-            user.province
-        )
-        if (!(businessAddressValidation?.Score && businessAddressValidation.Score >= 80)) {
-            console.log(
-                `invalid business address ${maskAddress(user.street_address)}, ${user.city}, ${
-                    user.province
-                } for user with id ${maskID(user.id)} - avoiding prefilling address`
-            )
-            user.street_address = null
-            user.city = null
-            user.province = null
-        }
-    } else {
-        user.street_address = null
-        user.city = null
-        user.province = null
-    }
-
-    if (user.workplace_street_address && user.workplace_city && user.workplace_province) {
-        const workplaceAddressValidation = await geocoderService.geocodeAddress(
-            user.workplace_street_address,
-            user.workplace_city,
-            user.workplace_province
-        )
-        if (!(workplaceAddressValidation?.Score && workplaceAddressValidation.Score >= 80)) {
-            console.log(
-                `invalid workplace address ${maskAddress(user.workplace_street_address)}, ${user.workplace_city}, ${
-                    user.workplace_province
-                } for user with id ${maskID(user.id)} - avoiding prefilling address`
-            )
-            user.workplace_street_address = null
-            user.workplace_city = null
-            user.workplace_province = null
-        }
-    } else {
-        user.workplace_street_address = null
-        user.workplace_city = null
-        user.workplace_province = null
-    }
-
-    // postal code checks //
-    const regex = /^[ABCEGHJ-NPRSTVXY][0-9][ABCEGHJ-NPRSTV-Z] [0-9][ABCEGHJ-NPRSTV-Z][0-9]$/
-    if (user.postal_code && !regex.test(user.postal_code)) {
-        console.log(
-            `invalid business postal code ${user.postal_code} for user with id ${maskID(
-                user.id
-            )} - avoiding prefilling postal code`
-        )
-        user.postal_code = null
-    }
-    if (user.workplace_postal_code && !regex.test(user.workplace_postal_code)) {
-        console.log(
-            `invalid workplace postal code ${user.workplace_postal_code} for user with id ${maskID(
-                user.id
-            )} - avoiding prefilling postal code`
-        )
-        user.workplace_postal_code = null
-    }
-
-    return {
-        ...(user.bceid_business_name && { operatingName: user.bceid_business_name }),
-        ...(user.cra_business_number && { businessNumber: user.cra_business_number }),
-        ...(user.street_address && { businessAddress: user.street_address }),
-        ...(user.city && { businessCity: user.city }),
-        ...(user.province && { businessProvince: user.province }),
-        ...(user.postal_code && { businessPostal: user.postal_code }),
-        ...(user.phone_number && { businessPhone: user.phone_number }),
-        ...(user.fax_number && { businessFax: user.fax_number }),
-        ...(user.contact_email && { userEmail: user.contact_email }),
-        ...((user.workplace_street_address || user.workplace_city || user.workplace_postal_code) && {
-            otherWorkAddress: true
-        }),
-        ...(!user.workplace_street_address &&
-            !user.workplace_city &&
-            !user.workplace_postal_code && {
-                otherWorkAddress: false
-            }),
-        container: {
-            ...((user.workplace_street_address || user.workplace_city || user.workplace_postal_code) && {
-                addressValidationAlt: "Validation required to continue."
-            }),
-            ...(user.workplace_street_address && { addressAlt: user.workplace_street_address }),
-            ...(user.workplace_city && { cityAlt: user.workplace_city }),
-            provinceAlt: "BC",
-            ...(user.workplace_postal_code && { postalAlt: user.workplace_postal_code })
-        },
-        ...(user.contact_name && { signatory1: user.contact_name })
     }
 }

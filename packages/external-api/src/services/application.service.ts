@@ -115,10 +115,6 @@ export const updateApplication = async (id: number, status: string | null, body:
             .update({
                 form_confirmation_id: submitted ? body.confirmationId : null, // only store the confirmation ID when the form has been submitted
                 form_submitted_date: submitted ? body.updatedAt ?? body.createdAt : null,
-                position_title: body.submission?.data?.positionTitle0,
-                num_positions: body.submission?.data?.numberOfPositions0
-                    ? Number(body.submission?.data?.numberOfPositions0)
-                    : null,
                 catchmentno: body.submission?.data?.catchmentNo ? Number(body.submission?.data?.catchmentNo) : null,
                 workbc_centre: body.submission?.data?.catchmentNoStoreFront
                     ? body.submission?.data?.catchmentNoStoreFront

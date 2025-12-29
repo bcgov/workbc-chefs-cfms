@@ -90,18 +90,6 @@ export const updateUser = async (userGuid: string, data: any) => {
                 if (data?.postal_code || data.postal_code === null) {
                     queryBuilder.update("postal_code", data.postal_code)
                 }
-                if (data?.workplace_street_address || data.workplace_street_address === null) {
-                    queryBuilder.update("workplace_street_address", data.workplace_street_address)
-                }
-                if (data?.workplace_city || data.workplace_city === null) {
-                    queryBuilder.update("workplace_city", data.workplace_city)
-                }
-                if (data?.workplace_province || data.workplace_province === null) {
-                    queryBuilder.update("workplace_province", data.workplace_province)
-                }
-                if (data?.workplace_postal_code || data.workplace_postal_code === null) {
-                    queryBuilder.update("workplace_postal_code", data.workplace_postal_code)
-                }
             })
     }
     return numUpdated
@@ -122,17 +110,7 @@ export const updateUserFromApplicationForm = async (user: any, appFormData: any)
         ...(appFormData?.businessAddress && !user?.street_address && { street_address: appFormData.businessAddress }),
         ...(appFormData?.businessCity && !user?.city && { city: appFormData.businessCity }),
         ...(appFormData?.businessProvince && !user?.province && { province: appFormData.businessProvince }),
-        ...(appFormData?.businessPostal && !user?.postal_code && { postal_code: appFormData.businessPostal }),
-        ...(appFormData.container?.addressAlt &&
-            !user.container?.workplace_street_address && {
-                workplace_street_address: appFormData.container.addressAlt
-            }),
-        ...(appFormData.container?.cityAlt &&
-            !user.container?.workplace_city && { workplace_city: appFormData.container.cityAlt }),
-        ...(appFormData.container?.provinceAlt &&
-            !user.container?.workplace_province && { workplace_province: appFormData.container.provinceAlt }),
-        ...(appFormData.container?.postalAlt &&
-            !user.container?.workplace_postal_code && { workplace_postal_code: appFormData.container.postalAlt })
+        ...(appFormData?.businessPostal && !user?.postal_code && { postal_code: appFormData.businessPostal })
     }
     return updateUser(user.id, updateData)
 }

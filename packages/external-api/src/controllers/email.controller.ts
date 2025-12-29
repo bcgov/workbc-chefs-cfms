@@ -58,14 +58,14 @@ export const sendEmail = async (formData: any, formID?: string) => {
         // Send the emails //
         if (userRecipients.length !== 0) {
             await emailService
-                .sendEmail(userEmailHTML, `Wage Subsidy Application Submitted`, userRecipients)
+                .sendEmail(userEmailHTML, `CEP Intake Application Submitted`, userRecipients)
                 .catch((e) => {
                     console.log(`[email.controller] error sending user email`)
                 })
         }
         if (employeeRecipients.length !== 0) {
             await emailService
-                .sendEmail(employeeEmailHTML, `Wage Subsidy Application Submitted`, employeeRecipients)
+                .sendEmail(employeeEmailHTML, `CEP Intake Application Submitted`, employeeRecipients)
                 .catch((e) => {
                     console.log(`[email.controller] error sending employee email(s)`)
                 })
