@@ -54,7 +54,9 @@ export const ApplicationList = (props: any) => {
 
     const handleRowClick = (id: Identifier, resource: string, record: any) => {
         if (record.status === "Draft" && record.id && record.form_submission_id) {
-            redirect("/ViewForm/applications/" + record.id, "")
+            const formURL = process.env.REACT_APP_DRAFT_URL + record.form_submission_id
+            window.open(formURL, "_blank")?.focus()
+            redirect("/", "applications")
         } else if (record.id && record.form_submission_id) {
             redirect("/ViewForm/applications/" + record.id, "")
         } else {
@@ -122,12 +124,6 @@ export const ApplicationList = (props: any) => {
                                         setIsFetching={setIsFetching}
                                     >
                                         <TextField label="Submission ID" source="form_confirmation_id" emptyText="-" />
-                                        <TextField label="Position Title" source="position_title" emptyText="-" />
-                                        <TextField
-                                            label="Number of Positions"
-                                            source="num_positions"
-                                            emptyText="-"
-                                        />{" "}
                                         <FunctionField
                                             label="Submitted Date"
                                             sortBy="form_submitted_date,updated_date,created_date"
@@ -144,7 +140,7 @@ export const ApplicationList = (props: any) => {
                                             sortBy="status"
                                             render={(record: any) => {
                                                 return (
-                                                    <Box display="flex" width="100%" justifyContent="center">
+                                                    <Box display="flex" width="100%" justifyContent="flex-start">
                                                         <Chip
                                                             label={
                                                                 record.status === "Draft"

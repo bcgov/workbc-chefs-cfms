@@ -27,9 +27,9 @@ export const ApplicationCreate = () => {
                 {
                     onSuccess: (data) => {
                         setLoading(false)
-                        if (process.env.REACT_APP_CHEFS_NEW_FORM_URL && process.env.REACT_APP_PBLMT_FORM_ID) {
-                            window.open(process.env.REACT_APP_CHEFS_NEW_FORM_URL + process.env.REACT_APP_PBLMT_FORM_ID)
-                        }
+                        const formURL = process.env.REACT_APP_DRAFT_URL + data.submission_id
+                        window.open(formURL, "_blank")?.focus()
+                        redirect("/", "applications")
                     },
                     onError: () => {
                         setLoading(false)

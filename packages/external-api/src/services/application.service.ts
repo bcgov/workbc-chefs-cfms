@@ -192,31 +192,22 @@ export const oneApplicationSubmitted = async (user: string) => {
 }
 
 export const getFormId = (formType: string) => {
-    if (formType === "Have Employee") {
-        return process.env.HAVE_EMPLOYEE_ID as string
-    }
-    if (formType === "Need Employee") {
-        return process.env.NEED_EMPLOYEE_ID as string
+    if (formType === "PBLMT") {
+        return process.env.PBLMT_FORM_ID as string
     }
     return ""
 }
 
 export const getFormPass = (formType: string) => {
-    if (formType === "Have Employee") {
-        return process.env.HAVE_EMPLOYEE_PASS as string
-    }
-    if (formType === "Need Employee") {
-        return process.env.NEED_EMPLOYEE_PASS as string
+    if (formType === "PBLMT") {
+        return process.env.PBLMT_FORM_PASS as string
     }
     return ""
 }
 
 export const getFormVersionId = (formType: string) => {
-    if (formType === "Have Employee") {
-        return process.env.HAVE_EMPLOYEE_VERSION_ID as string
-    }
-    if (formType === "Need Employee") {
-        return process.env.NEED_EMPLOYEE_VERSION_ID as string
+    if (formType === "PBLMT") {
+        return process.env.PBLMT_FORM_VERSION_ID as string
     }
     return ""
 }

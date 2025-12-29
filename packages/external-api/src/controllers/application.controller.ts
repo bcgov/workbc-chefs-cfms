@@ -66,17 +66,30 @@ export const createApplication = async (req: any, res: express.Response) => {
             return res.status(403).send("Forbidden")
         }
 
-        const insertResult = await insertApplication(
+        // Create a new form draft //
+        const formID = applicationService.getFormId(req.body.formType)
+        const formVersionID = applicationService.getFormVersionId(req.body.formType)
+        const createDraftResult = await formService.createLoginProtectedDraft(
+            req.kauth.grant.access_token,
+            formID,
+            formVersionID,
             req.body.formKey,
-            req.body.guid,
-            req.body.formType,
-            "",
-            req.kauth.grant.access_token.content.idp,
-            req.kauth.grant.access_token.content.idp_username
+            {}
         )
-        if (insertResult?.rowCount === 1) {
-            // successful insertion
-            return res.status(200).send({ recordId: req.body.formKey })
+
+        if (createDraftResult?.id) {
+            const insertResult = await insertApplication(
+                req.body.formKey,
+                req.body.guid,
+                req.body.formType,
+                createDraftResult.id,
+                req.kauth.grant.access_token.content.idp,
+                req.kauth.grant.access_token.content.idp_username
+            )
+            if (insertResult?.rowCount === 1) {
+                // successful insertion
+                return res.status(200).send({ recordId: req.body.formKey, submissionId: createDraftResult.id })
+            }
         }
         return res.status(500).send("Internal Server Error")
     } catch (e: any) {
