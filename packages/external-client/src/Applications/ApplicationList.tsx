@@ -56,9 +56,12 @@ export const ApplicationList = (props: any) => {
         if (record.status === "Draft" && record.id && record.form_submission_id) {
             const formURL = process.env.REACT_APP_DRAFT_URL + record.form_submission_id
             window.open(formURL, "_blank")?.focus()
+            dataProvider.mark(resource, { id: record.id })
             redirect("/", "applications")
         } else if (record.id && record.form_submission_id) {
-            redirect("/ViewForm/applications/" + record.id, "")
+            const formURL = process.env.REACT_APP_VIEW_URL + record.form_submission_id
+            window.open(formURL, "_blank")?.focus()
+            redirect("/", "applications")
         } else {
             return "" // rowClick expects a path to be returned
         }

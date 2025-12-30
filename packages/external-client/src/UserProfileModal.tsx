@@ -211,54 +211,6 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onRequestCl
                                     ]}
                                 />
                             </Stack>
-                            <h3>
-                                Workplace Address{" "}
-                                <span style={{ fontWeight: "normal" }}>(if different from above)</span>
-                            </h3>
-                            <Stack direction="column" spacing={2} sx={{ paddingTop: "1em" }}>
-                                <StyledTextInput
-                                    source="workplace_street_address"
-                                    label="Address"
-                                    sx={{ minWidth: "43em" }}
-                                    validate={maxLength(255)}
-                                />
-                                <Stack direction="row" spacing={6}>
-                                    <StyledTextInput
-                                        source="workplace_city"
-                                        label="City"
-                                        sx={{ minWidth: "20em" }}
-                                        validate={maxLength(255)}
-                                    />
-                                    <StyledSelectInput
-                                        source="workplace_province"
-                                        label="Province"
-                                        sx={{ minWidth: "20em" }}
-                                        choices={[{ id: "BC", name: "British Columbia" }]}
-                                    />
-                                </Stack>
-                                <StyledTextInput
-                                    source="workplace_postal_code"
-                                    label="Postal Code"
-                                    sx={{ maxWidth: "20em" }}
-                                    validate={[
-                                        minLength(6),
-                                        maxLength(7),
-                                        regex(
-                                            /^[ABCEGHJ-NPRSTVXY][0-9][ABCEGHJ-NPRSTV-Z] [0-9][ABCEGHJ-NPRSTV-Z][0-9]$/,
-                                            "Enter in the format: A1A 1A1"
-                                        )
-                                    ]}
-                                />
-                                <Box sx={{ width: "100%", display: "flex", justifyContent: "right" }}>
-                                    <SaveButton icon={<span />} alwaysEnable sx={SaveButtonStyles} />
-                                    <ModalButton
-                                        text="CANCEL"
-                                        showIcon={false}
-                                        onClick={onRequestClose}
-                                        ariaLabel="Close dialog"
-                                    />
-                                </Box>
-                            </Stack>
                         </Stack>
                     </SimpleForm>
                 </BCGovModal>
