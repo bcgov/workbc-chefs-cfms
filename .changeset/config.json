@@ -1,11 +1,11 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "bcgov/workbc-wage-subsidy" }],
-  "commit": false,
-  "fixed": [],
-  "linked": [],
-  "access": "restricted",
-  "baseBranch": "next",
-  "updateInternalDependencies": "patch",
-  "ignore": []
+    "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
+    "changelog": ["@changesets/changelog-github", { "repo": "bcgov/workbc-chefs-cfms" }],
+    "commit": false,
+    "fixed": [],
+    "linked": [],
+    "access": "restricted",
+    "baseBranch": "next",
+    "updateInternalDependencies": "patch",
+    "ignore": []
 }

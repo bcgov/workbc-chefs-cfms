@@ -319,10 +319,10 @@ export const deleteApplication = async (req: any, res: express.Response) => {
             return res.status(403).send("Not Authorized")
         }
         const { id } = req.params
-        const wage = await applicationService.getApplicationByID(id)
+        const application = await applicationService.getApplicationByID(id)
         /* Only applications created by the user who sent the request
         or if the status is Awaiting Submission can be deleted */
-        if (wage.createdby !== bceid_guid || wage.status !== null) {
+        if (application.createdby !== bceid_guid || application.status !== null) {
             return res.status(401).send("Not Authorized")
         }
         const deleted = await applicationService.deleteApplication(id)

@@ -1,16 +1,16 @@
 import { AppEnv } from "../types"
 const APP_ENV = process.env.REACT_APP_ENVIRONMENT || "Local Dev"
 
-export const setAbsoluteWageSubUrl = (): string => {
+export const setAbsoluteCEPUrl = (): string => {
     switch (APP_ENV) {
         case "Local Dev":
             return "http://localhost:3000/"
         case "TEST":
-            return "https://wage-sub-test.es.workbc.ca/"
+            return "https://cep-intake-test.es.workbc.ca/"
         case "DEV":
-            return "https://wage-sub-dev.es.workbc.ca/"
+            return "https://cep-intake-dev.es.workbc.ca/"
         case "PRODUCTION":
-            return "https://wage-subsidy.es.workbc.ca/"
+            return "https://cep-intake.es.workbc.ca/"
         default:
             return "http://localhost:3000/"
     }
@@ -33,6 +33,6 @@ export const setAppEnv = (): AppEnv => {
 
 export const setEnvVariables = (): { appEnv: AppEnv; absolutePath: string } => {
     const appEnv = setAppEnv()
-    const absolutePath = setAbsoluteWageSubUrl()
+    const absolutePath = setAbsoluteCEPUrl()
     return { appEnv, absolutePath }
 }

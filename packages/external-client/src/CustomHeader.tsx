@@ -147,9 +147,9 @@ export const Header = (props: HeaderProps) => {
                     <div className="accessiblity-features-content">
                         <h2>Form Completion</h2>
                         <p>
-                            For applications and claim forms, we use embedded form functionality within the CEP Intake
-                            application. For screen readers, use the 'Open form in new tab' icon link to allow your
-                            screen reader to properly read out and allow you to work with form fields.
+                            For application forms, we use embedded form functionality within the CEP Intake application.
+                            For screen readers, use the 'Open form in new tab' icon link to allow your screen reader to
+                            properly read out and allow you to work with form fields.
                         </p>
                         <h2>Labels and Tool Tips</h2>
                         <p>
@@ -159,22 +159,22 @@ export const Header = (props: HeaderProps) => {
                         </p>
                         <h2>Navigation</h2>
                         <p>
-                            Users can navigate between the list of applications or claim forms and the status filter
-                            sidebar (left-hand portion of the screen) using the left and right arrow keys.
+                            Users can navigate between the list of application formsand the status filter sidebar
+                            (left-hand portion of the screen) using the left and right arrow keys.
                         </p>
                         <h2>Checkboxes</h2>
                         <p>
                             Selecting a given checkbox will enable additional actions to appear at the top of the list
-                            of applications or claim forms.
+                            of application forms.
                         </p>
                         <p>
-                            For Users, this action allows the user to <b>share</b> selected applications and claim forms
-                            with others within your Business BCeID organization. Note this function is not available for
+                            For Users, this action allows the user to <b>share</b> selected application forms with
+                            others within your Business BCeID organization. Note this function is not available for
                             Basic BCeID users.
                         </p>
                         <p>
-                            For Ministry Staff, this action allows the user to <b>move</b> applications and claim forms
-                            from one catchment to another.
+                            For Ministry Staff, this action allows the user to <b>move</b> application forms from one
+                            catchment to another.
                         </p>
                     </div>
                 </div>
