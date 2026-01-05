@@ -111,7 +111,7 @@ export const ApplicationList = (props: any) => {
                                     render={(record: any) =>
                                         record.form_submitted_date
                                             ? new Date(record.updated_date).toLocaleDateString()
-                                            : "-"
+                                            : new Date(record.created_date).toLocaleDateString()
                                     }
                                 />
                                 <FunctionField

@@ -85,7 +85,8 @@ export const insertApplication = async (
         created_date: new Date().toISOString(),
         created_by: userGuid,
         created_by_idp: `${idpUsername}@${idp}`,
-        status: "Draft"
+        status: "Draft",
+        stale: true
     }
     const result = await knex("applications").modify((queryBuilder: any) => {
         queryBuilder.insert(data)
@@ -172,7 +173,6 @@ export const getStaleDrafts = async (user: string) => {
                 .as("a2")
         )
         .where("status", "Draft")
-        .where("stale", true)
     return drafts
 }
 

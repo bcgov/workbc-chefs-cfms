@@ -6,9 +6,7 @@ import { insertApplication } from "../lib/transactions"
 import * as applicationService from "../services/application.service"
 import * as userService from "../services/user.service"
 import * as formService from "../services/form.service"
-import * as geocoderService from "../services/geocoder.service"
 import * as emailController from "./email.controller"
-import { maskAddress } from "../utils/logging"
 
 export const getAllApplications = async (req: any, res: express.Response) => {
     try {
@@ -22,6 +20,10 @@ export const getAllApplications = async (req: any, res: express.Response) => {
         const sortOrder = sort?.length > 1 ? sort[1] : ""
         const page = req.query.page ?? 1
         const perPage = req.query.perPage ?? 1
+
+        // Update any drafts that have changed.
+        const drafts = await applicationService.getStaleDrafts(bceid_guid)
+        await Promise.all(drafts.map(updateApplicationFromForm))
 
         const applications = await applicationService.getAllApplications(
             Number(perPage),
@@ -152,95 +154,14 @@ const updateApplicationFromForm = async (application: any) => {
                     formPass,
                     application.form_submission_id
                 )
-                const submission = submissionResponse?.submission.submission
                 if (submissionResponse.submission.draft === false) {
                     // Application form has been submitted; determine the catchment & storefront, then update the application in the DB //
-                    let catchment
-                    let storefront
-                    const selected = submission?.data?.otherSelectedCentre ?? submission?.data?.selectedCentre
-                    if (selected && selected.catchment && selected.storefront) {
-                        console.log(
-                            `[application.controller] submission id ${application.form_submission_id} has selected the following catchment & storefront: ${selected.catchment} ${selected.storefront}`
-                        )
-                        catchment = selected.catchment
-                        storefront = selected.storefront
-                    } else {
-                        // Route the catchment & storefront for the submitted application //
-                        // Use the workplace address if provided, otherwise use the business address //
-                        let address
-                        let city
-                        let province
-                        const workplaceContainer = submission?.data?.container
-                        if (
-                            workplaceContainer?.addressAlt &&
-                            workplaceContainer.cityAlt &&
-                            workplaceContainer.provinceAlt
-                        ) {
-                            address = workplaceContainer.addressAlt
-                            city = workplaceContainer.cityAlt
-                            province = workplaceContainer.provinceAlt
-                        } else if (
-                            submission?.data?.businessAddress &&
-                            submission.data.businessCity &&
-                            submission.data.businessProvince
-                        ) {
-                            address = submission.data.businessAddress
-                            city = submission.data.businessCity
-                            province = submission.data.businessProvince
-                        }
-                        console.log(
-                            `[application.controller] address for submission id ${
-                                application.form_submission_id
-                            } - Address: ${maskAddress(address)}, City: ${city}, Province: ${province}`
-                        )
-                        const { Score, Catchment, Storefront } = await geocoderService.geocodeAddress(
-                            address,
-                            city,
-                            province
-                        )
-                        console.log(
-                            `[application.controller] address validation result for submission id ${application.form_submission_id} - Score: ${Score}, Catchment: ${Catchment}, Storefront: ${Storefront}`
-                        )
-                        if (Score && Catchment && Storefront) {
-                            if (Score >= 80) {
-                                catchment = Catchment
-                                storefront = Storefront
-                            } else {
-                                console.log(
-                                    `[application.controller] insufficient address validation score for application submission id ${application.form_submission_id} - this shouldn't happen!`
-                                )
-                            }
-                        }
-                    }
-
-                    if (catchment && storefront) {
-                        const newDataObj = Object.assign(submissionResponse.submission.submission.data, {
-                            catchmentNo: catchment,
-                            storefrontId: storefront,
-                            catchmentNoStoreFront: `${catchment}-${storefront}`,
-                            matchedToCentre: `${catchment}-${storefront}`
-                        })
-                        submissionResponse.submission.submission.data = newDataObj // update the object used for updating the application record
-                    } else {
-                        console.log(
-                            `[application.controller] catchment & storefront calculation failed for submission id ${application.form_submission_id} - this shouldn't happen!`
-                        )
-                    }
                     await applicationService.updateApplication(
                         application.id,
                         "New",
                         submissionResponse.submission,
-                        true
+                        false
                     )
-
-                    // Update the catchment of the form in CHEFS //
-                    if (catchment) {
-                        await formService.updateSubmissionCatchment(
-                            application.form_submission_id,
-                            submissionResponse.submission,
-                            catchment
-                        )
-                    }
 
                     // Send email confirmations and notifications //
                     await emailController
