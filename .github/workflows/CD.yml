@@ -39,9 +39,6 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - imagename: "workbc-chefs-cfms-static"
-                      context: "./packages/static"
-                      env: true
                     - imagename: "workbc-chefs-cfms-external-client"
                       context: "./packages/external-client"
                       env: true
