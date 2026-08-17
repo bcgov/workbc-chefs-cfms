@@ -54,12 +54,12 @@ export const ApplicationList = (props: any) => {
 
     const handleRowClick = (id: Identifier, resource: string, record: any) => {
         if (record.status === "Draft" && record.id && record.form_submission_id) {
-            const formURL = process.env.REACT_APP_DRAFT_URL + record.form_submission_id
+            const formURL = process.env.REACT_APP_DRAFT_URL + record.form_submission_id + `&stream=${record.form_type}`
             window.open(formURL, "_blank")?.focus()
             dataProvider.mark(resource, { id: record.id })
             redirect("/", "applications")
         } else if (record.id && record.form_submission_id) {
-            const formURL = process.env.REACT_APP_VIEW_URL + record.form_submission_id
+            const formURL = process.env.REACT_APP_VIEW_URL + record.form_submission_id + `&stream=${record.form_type}`
             window.open(formURL, "_blank")?.focus()
             redirect("/", "applications")
         } else {
@@ -127,6 +127,7 @@ export const ApplicationList = (props: any) => {
                                         setIsFetching={setIsFetching}
                                     >
                                         <TextField label="Submission ID" source="form_confirmation_id" emptyText="-" />
+                                        <TextField label="Organization" source="organization" emptyText="-" />
                                         <FunctionField
                                             label="Submitted Date"
                                             sortBy="form_submitted_date,updated_date,created_date"
@@ -181,7 +182,8 @@ export const ApplicationList = (props: any) => {
                                                     {record.status === "Draft" && (
                                                         <Tooltip title="Delete Application">
                                                             <Button
-                                                                onClick={() => {
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation()
                                                                     if (
                                                                         window.confirm(
                                                                             "Are you sure you want to delete this application?"

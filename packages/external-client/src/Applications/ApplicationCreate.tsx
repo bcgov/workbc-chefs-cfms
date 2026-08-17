@@ -27,7 +27,7 @@ export const ApplicationCreate = () => {
                 {
                     onSuccess: (data) => {
                         setLoading(false)
-                        const formURL = process.env.REACT_APP_DRAFT_URL + data.submission_id
+                        const formURL = process.env.REACT_APP_DRAFT_URL + data.submission_id + `&stream=${formType}`
                         window.open(formURL, "_blank")?.focus()
                         redirect("/", "applications")
                     },

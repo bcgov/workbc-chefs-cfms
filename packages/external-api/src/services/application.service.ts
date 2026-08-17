@@ -123,7 +123,7 @@ export const updateApplication = async (id: number, status: string | null, body:
                 status: body.status ?? status,
                 updated_by: "system",
                 updated_date: new Date().toISOString(),
-                organization: body.submission?.data?.operatingName,
+                organization: body.submission?.data?.CEPOrgLegalName,
                 stale: false
             })
     }
@@ -191,23 +191,8 @@ export const oneApplicationSubmitted = async (user: string) => {
     return submittedApplications.length === 1
 }
 
-export const getFormId = (formType: string) => {
-    if (formType === "PBLMT") {
-        return process.env.PBLMT_FORM_ID as string
-    }
-    return ""
-}
+export const getFormId = (formType: string) => process.env.CEP_FORM_ID as string
 
-export const getFormPass = (formType: string) => {
-    if (formType === "PBLMT") {
-        return process.env.PBLMT_FORM_PASS as string
-    }
-    return ""
-}
+export const getFormPass = (formType: string) => process.env.CEP_FORM_PASS as string
 
-export const getFormVersionId = (formType: string) => {
-    if (formType === "PBLMT") {
-        return process.env.PBLMT_FORM_VERSION_ID as string
-    }
-    return ""
-}
+export const getFormVersionId = (formType: string) => process.env.CEP_FORM_VERSION_ID as string

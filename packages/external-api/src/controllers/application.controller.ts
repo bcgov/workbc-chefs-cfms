@@ -183,7 +183,7 @@ const updateApplicationFromForm = async (application: any) => {
                         application.id,
                         "Draft",
                         submissionResponse.submission,
-                        true
+                        false
                     )
                 }
             }

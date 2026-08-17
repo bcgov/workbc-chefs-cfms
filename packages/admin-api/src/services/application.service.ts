@@ -10,7 +10,6 @@ export const getAllApplications = async (
     trx?: any
 ) => {
     const applications = await knex("applications")
-        .whereNot("status", "Draft")
         .whereNot("status", "Deleted")
         .modify((queryBuilder: any) => {
             if (filters.id) {
@@ -60,7 +59,7 @@ export const getApplicationCounts = async (catchmentno: string) => {
             .select("status")
             .count("*")
             .from("applications")
-            .whereNot("status", "Draft")
+            .whereNot("status", "Deleted")
             .where("catchmentno", Number(catchmentno))
             .groupBy("status")
     } else {
@@ -68,7 +67,7 @@ export const getApplicationCounts = async (catchmentno: string) => {
             .select("status")
             .count("*")
             .from("applications")
-            .whereNot("status", "Draft")
+            .whereNot("status", "Deleted")
             .groupBy("status")
     }
 

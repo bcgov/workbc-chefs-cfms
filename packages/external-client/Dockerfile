@@ -1,4 +1,4 @@
-FROM node:18-alpine as builder
+FROM node:20-alpine3.20 as builder
 # Set the working directory to /app inside the container
 ENV NODE_ENV=production
 ARG REACT_APP_KEYCLOAK_REALM

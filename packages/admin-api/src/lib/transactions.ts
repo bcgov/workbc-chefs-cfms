@@ -32,12 +32,8 @@ const updateApplication = async (application: any, data: any, username: string, 
 }
 
 export const updateChefsCatchment = async (formType: string, submissionID: string, catchment: number) => {
-    let formID
-    let formPass
-    if (formType === "PBLMT") {
-        formID = process.env.PBLMT_FORM_ID as string
-        formPass = process.env.PBLMT_FORM_PASS as string
-    }
+    const formID = process.env.CEP_FORM_ID as string
+    const formPass = process.env.CEP_FORM_PASS as string
     if (submissionID && formID && formPass) {
         await formService
             .getSubmission(formID, formPass, submissionID)

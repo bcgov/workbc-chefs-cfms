@@ -12,11 +12,14 @@ import addressRoute from "./routes/address.route"
 const corsOptions = {
     origin: [
         process.env.ORIGIN_URL || process.env.OPENSHIFT_NODEJS_ORIGIN_URL || ("http://localhost:3000" as string),
-        process.env.CHEFS_FRONTEND_URL as string
+        process.env.CHEFS_FRONTEND_URL as string,
+        "http://localhost:8000" as string
     ],
     credentials: true,
     optionsSuccessStatus: 200
 }
+
+console.log("CORS OPTIONS: ", corsOptions)
 
 const kcConfig = {
     "confidential-port": process.env.AUTH_KEYCLOAK_CONFIDENTIAL_PORT || 0,
