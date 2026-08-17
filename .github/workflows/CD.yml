@@ -90,17 +90,17 @@ jobs:
               with:
                   # URL to your OpenShift cluster.
                   # Refer to Step 2.
-                  openshift_server_url: ${{ secrets.OCP4_SERVER_URL }}
+                  openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
 
                   # Authentication Token. Can use username and password instead.
                   # Refer to Step 3.
-                  openshift_token: ${{ secrets.API_TOKEN_4 }}
+                  openshift_token: ${{ secrets.API_TOKEN }}
 
                   # Disables SSL cert checking. Use this if you don't have the certificate authority data.
                   insecure_skip_tls_verify: true
 
                   # Optional - this sets your Kubernetes context's current namespace after logging in.
-                  namespace: ${{secrets.PROJECT_TOOLS_4}}
+                  namespace: ${{secrets.PROJECT_TOOLS}}
             # Build image
             - name: Building image
               id: build-static-image
@@ -136,5 +136,5 @@ jobs:
                   image: ${{ steps.build-static-image.outputs.image }}
                   tags: ${{ steps.build-static-image.outputs.tags }}
                   registry: image-registry.apps.silver.devops.gov.bc.ca/551bf1-tools
-                  username: ${{ secrets.API_TOKEN_4 }}
-                  password: ${{ secrets.API_TOKEN_4 }}
+                  username: ${{ secrets.API_TOKEN }}
+                  password: ${{ secrets.API_TOKEN }}
