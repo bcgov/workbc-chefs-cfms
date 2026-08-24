@@ -109,21 +109,15 @@ jobs:
                   containerfiles: ${{ matrix.context }}/Dockerfile
                   tls-verify: false
                   build-args: |
-                      VITE_REACT_ENVIRONMENT=${{ vars.REACT_APP_ENVIRONMENT }}
                       REACT_APP_ENVIRONMENT=${{ vars.REACT_APP_ENVIRONMENT }}
                       REACT_ADMIN_TOKEN=${{ secrets.REACT_ADMIN_TOKEN }}
                       FONT_AWESOME_TOKEN=${{ secrets.FONT_AWESOME_TOKEN }}
                       REACT_APP_DATA_PROVIDER_URL=${{ vars.REACT_APP_DATA_PROVIDER_URL }}
-                      REACT_APP_ADMIN_API_URL=${{ vars.REACT_APP_ADMIN_API_URL }}
                       REACT_APP_KEYCLOAK_REALM=${{ vars.REACT_APP_KEYCLOAK_REALM }}
                       REACT_APP_KEYCLOAK_URL=${{ vars.REACT_APP_KEYCLOAK_URL }}
                       REACT_APP_KEYCLOAK_CLIENT_ID=${{ vars.REACT_APP_KEYCLOAK_CLIENT_ID }}
                       REACT_APP_DRAFT_URL=${{ vars.REACT_APP_DRAFT_URL }}
                       REACT_APP_VIEW_URL=${{ vars.REACT_APP_VIEW_URL }}
-                      REACT_APP_MINISTRY_VIEW_URL=${{ vars.REACT_APP_MINISTRY_VIEW_URL }}
-                      VITE_external_URL=${{ vars.VITE_external_URL }}
-                      VITE_SERVICE_PROVIDER_URL=${{ vars.VITE_SERVICE_PROVIDER_URL }}
-                      VITE_MINISTRY_URL=${{ vars.VITE_MINISTRY_URL }}
                   extra-args: --ulimit nofile=4096:4096
             # Push to specified registry
             - name: Push Static To OpenShift Image repo
