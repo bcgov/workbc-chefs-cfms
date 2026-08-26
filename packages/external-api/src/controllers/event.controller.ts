@@ -19,7 +19,7 @@ export const submission = async (req: express.Request, res: express.Response) =>
             `[event.controller] submission event received for form type ${formType} with submission id ${req.body.submissionId}`
         )
 
-        const formPass = process.env.APPLICATION_FORM_PASS
+        const formPass = applicationService.getFormPass(formType)
 
         if (!formPass) {
             return res.status(400).send("Invalid form type parameter provided")

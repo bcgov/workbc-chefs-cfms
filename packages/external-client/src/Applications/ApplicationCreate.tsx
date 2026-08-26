@@ -93,10 +93,14 @@ export const ApplicationCreate = () => {
                                     <Grid container direction="row">
                                         <Grid item width="100%">
                                             <Box display="flex" justifyContent="center">
-                                                <BCGovPrimaryButton
-                                                    text="Start Application"
-                                                    onClick={() => handleClick("PBLMT")}
-                                                />
+                                                <BCGovPrimaryButton text="PBLMT" onClick={() => handleClick("PBLMT")} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container direction="row">
+                                        <Grid item width="100%">
+                                            <Box display="flex" justifyContent="center">
+                                                <BCGovPrimaryButton text="LMP" onClick={() => handleClick("LMP")} />
                                             </Box>
                                         </Grid>
                                     </Grid>
