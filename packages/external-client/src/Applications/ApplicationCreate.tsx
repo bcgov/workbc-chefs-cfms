@@ -50,7 +50,7 @@ export const ApplicationCreate = () => {
             minHeight="50em"
             paddingTop="6em"
             paddingBottom="3em"
-            width="10%"
+            width="100%"
             display="flex"
             justifyContent="center"
             minWidth="58em"
