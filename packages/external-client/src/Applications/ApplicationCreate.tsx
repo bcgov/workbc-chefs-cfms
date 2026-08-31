@@ -46,7 +46,15 @@ export const ApplicationCreate = () => {
     }, [isLoading, redirect, searchParams, total])
 
     return (
-        <Box paddingTop="6em" paddingBottom="3em" width="100%" display="flex" justifyContent="center" minWidth="58em">
+        <Box
+            minHeight="50em"
+            paddingTop="6em"
+            paddingBottom="3em"
+            width="10%"
+            display="flex"
+            justifyContent="center"
+            minWidth="58em"
+        >
             <Card>
                 <Grid container direction="column" height="100%" spacing={4}>
                     <Grid item>
@@ -86,25 +94,124 @@ export const ApplicationCreate = () => {
                             <Grid item xs>
                                 <Box
                                     display="flex"
+                                    height="40%"
+                                    justifyContent="center"
+                                    alignItems="end"
+                                    sx={{ flexGrow: 1 }}
+                                >
+                                    <Grid container direction="row" alignContent={"flex-start"}>
+                                        <Grid container direction="column">
+                                            <Grid item width="100%">
+                                                <Box
+                                                    display="flex"
+                                                    justifyContent="center"
+                                                    maxHeight="6em"
+                                                    minHeight="6em"
+                                                >
+                                                    <BCGovPrimaryButton
+                                                        text="Project Based Labour Market Training (PBLMT)"
+                                                        onClick={() => handleClick("PBLMT")}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container direction="row">
+                                        <Grid container direction="column">
+                                            <Grid item width="100%">
+                                                <Box
+                                                    display="flex"
+                                                    justifyContent="center"
+                                                    maxHeight="6em"
+                                                    minHeight="6em"
+                                                >
+                                                    <BCGovPrimaryButton
+                                                        text="Labour Market Partnerships (LMP)"
+                                                        onClick={() => handleClick("LMP")}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                                <Box
+                                    display="flex"
+                                    height="60%"
+                                    justifyContent="center"
+                                    alignItems="end"
+                                    sx={{ flexGrow: 1 }}
+                                >
+                                    <Grid container direction="row" alignContent={"flex-start"}>
+                                        <Grid container direction="column">
+                                            <Grid item width="100%">
+                                                <Box
+                                                    display="flex"
+                                                    justifyContent="center"
+                                                    maxHeight="6em"
+                                                    minHeight="6em"
+                                                >
+                                                    <BCGovPrimaryButton
+                                                        text="Job Creation Partnerships (JCP)"
+                                                        onClick={() => handleClick("JCP")}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container direction="row">
+                                        <Grid container direction="column">
+                                            <Grid item width="100%">
+                                                <Box
+                                                    display="flex"
+                                                    justifyContent="center"
+                                                    maxHeight="6em"
+                                                    minHeight="6em"
+                                                >
+                                                    <BCGovPrimaryButton
+                                                        text="Research and Innovation (R&I)"
+                                                        onClick={() => handleClick("RI")}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+                                {/* <Box
+                                    display="flex"
+                                    height="20%"
+                                    justifyContent="center"
+                                    alignItems="end"
+                                    sx={{ flexGrow: 1 }}
+                                >
+                                    <Grid container direction="row" alignContent={"flex-start"}>
+                                        <Grid container direction="column">
+                                            <Grid item width="100%">
+                                                <Box display="flex" justifyContent="center">
+                                                    <BCGovPrimaryButton
+                                                        text="PBLMT"
+                                                        onClick={() => handleClick("PBLMT")}
+                                                    />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container direction="row">
+                                        <Grid container direction="column">
+                                            <Grid item width="100%">
+                                                <Box display="flex" justifyContent="center">
+                                                    <BCGovPrimaryButton text="LMP" onClick={() => handleClick("LMP")} />
+                                                </Box>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Box> */}
+                                {/* <Box
+                                    display="flex"
                                     height="100%"
                                     justifyContent="center"
                                     alignItems="end"
                                     sx={{ flexGrow: 1 }}
                                 >
-                                    <Grid container direction="row">
-                                        <Grid item width="100%">
-                                            <Box display="flex" justifyContent="center">
-                                                <BCGovPrimaryButton text="PBLMT" onClick={() => handleClick("PBLMT")} />
-                                            </Box>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container direction="row">
-                                        <Grid item width="100%">
-                                            <Box display="flex" justifyContent="center">
-                                                <BCGovPrimaryButton text="LMP" onClick={() => handleClick("LMP")} />
-                                            </Box>
-                                        </Grid>
-                                    </Grid>
                                     <Grid container direction="row">
                                         <Grid item width="100%">
                                             <Box display="flex" justifyContent="center">
@@ -119,7 +226,7 @@ export const ApplicationCreate = () => {
                                             </Box>
                                         </Grid>
                                     </Grid>
-                                </Box>
+                                </Box> */}
                             </Grid>
                         </>
                     )}
