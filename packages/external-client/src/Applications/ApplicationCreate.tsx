@@ -59,7 +59,8 @@ export const ApplicationCreate = () => {
                                         the following information:
                                     </p>
                                     <ul>
-                                        <li>Your CRA Business Number</li>
+                                        <li>CRA business number</li>
+                                        <li>WorkSafeBC number and rate</li>
                                     </ul>
                                 </Box>
                             </Grid>
@@ -101,6 +102,20 @@ export const ApplicationCreate = () => {
                                         <Grid item width="100%">
                                             <Box display="flex" justifyContent="center">
                                                 <BCGovPrimaryButton text="LMP" onClick={() => handleClick("LMP")} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container direction="row">
+                                        <Grid item width="100%">
+                                            <Box display="flex" justifyContent="center">
+                                                <BCGovPrimaryButton text="JCP" onClick={() => handleClick("JCP")} />
+                                            </Box>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container direction="row">
+                                        <Grid item width="100%">
+                                            <Box display="flex" justifyContent="center">
+                                                <BCGovPrimaryButton text="R&I" onClick={() => handleClick("RI")} />
                                             </Box>
                                         </Grid>
                                     </Grid>

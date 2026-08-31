@@ -198,6 +198,12 @@ export const getFormId = (formType: string) => {
     if (formType === "LMP") {
         return process.env.LMP_FORM_ID as string
     }
+    if (formType === "JCP") {
+        return process.env.JCP_FORM_ID as string
+    }
+    if (formType === "RI") {
+        return process.env.RI_FORM_ID as string
+    }
     return ""
 }
 
@@ -208,6 +214,12 @@ export const getFormPass = (formType: string) => {
     if (formType === "LMP") {
         return process.env.LMP_FORM_PASS as string
     }
+    if (formType === "JCP") {
+        return process.env.JCP_FORM_PASS as string
+    }
+    if (formType === "RI") {
+        return process.env.RI_FORM_PASS as string
+    }
     return ""
 }
 
@@ -217,6 +229,12 @@ export const getFormVersionId = (formType: string) => {
     }
     if (formType === "LMP") {
         return process.env.LMP_FORM_VERSION_ID as string
+    }
+    if (formType === "JCP") {
+        return process.env.JCP_FORM_VERSION_ID as string
+    }
+    if (formType === "RI") {
+        return process.env.RI_FORM_VERSION_ID as string
     }
     return ""
 }
