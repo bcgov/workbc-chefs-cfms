@@ -127,7 +127,18 @@ export const ApplicationList = (props: any) => {
                                         setIsFetching={setIsFetching}
                                     >
                                         <TextField label="Submission ID" source="form_confirmation_id" emptyText="-" />
+                                        <TextField label="Application Type" source="form_type" emptyText="-" />
                                         <TextField label="Organization" source="organization" emptyText="-" />
+                                        <FunctionField
+                                            label="Created Date"
+                                            sortBy="created_date"
+                                            sortByOrder="DESC"
+                                            render={(record: any) => {
+                                                return record.created_date
+                                                    ? new Date(record.created_date).toLocaleDateString()
+                                                    : "-"
+                                            }}
+                                        />
                                         <FunctionField
                                             label="Submitted Date"
                                             sortBy="form_submitted_date,updated_date,created_date"
@@ -138,7 +149,6 @@ export const ApplicationList = (props: any) => {
                                                     : "-"
                                             }}
                                         />
-                                        {allowSharing && <SharedWithField label="Shared With" openModal={openModal} />}
                                         <FunctionField
                                             label="Status"
                                             sortBy="status"
@@ -150,26 +160,26 @@ export const ApplicationList = (props: any) => {
                                                                 record.status === "Draft"
                                                                     ? "Draft"
                                                                     : record.status === "New"
-                                                                    ? "Submitted"
-                                                                    : record.status === "In Progress"
-                                                                    ? "Processing"
-                                                                    : record.status === "Completed"
-                                                                    ? "Completed"
-                                                                    : "Cancelled"
+                                                                      ? "Submitted"
+                                                                      : record.status === "In Progress"
+                                                                        ? "Processing"
+                                                                        : record.status === "Completed"
+                                                                          ? "Completed"
+                                                                          : "Cancelled"
                                                             }
                                                             size="small"
                                                             color={
                                                                 record.status === "Draft"
                                                                     ? "secondary"
                                                                     : record.status === "New"
-                                                                    ? "info"
-                                                                    : record.status === "In Progress"
-                                                                    ? "warning"
-                                                                    : record.status === "Completed"
-                                                                    ? "success"
-                                                                    : record.status === "Cancelled"
-                                                                    ? "error"
-                                                                    : "primary"
+                                                                      ? "info"
+                                                                      : record.status === "In Progress"
+                                                                        ? "warning"
+                                                                        : record.status === "Completed"
+                                                                          ? "success"
+                                                                          : record.status === "Cancelled"
+                                                                            ? "error"
+                                                                            : "primary"
                                                             }
                                                         />
                                                     </Box>

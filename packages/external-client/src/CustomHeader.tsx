@@ -78,43 +78,6 @@ export const Header = (props: HeaderProps) => {
                     }}
                 >
                     <Box>{menu}</Box>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                        <Button
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                cursor: "pointer",
-                                fontSize: "14px",
-                                color: "rgb(255, 255, 255)",
-                                textTransform: "none",
-                                ":hover": {
-                                    textDecoration: "underline"
-                                }
-                            }}
-                            onClick={() => setAccessibilityFeaturesModalIsOpen(true)}
-                        >
-                            <FontAwesomeIcon icon={faEyeLowVision} size="2x" style={{ marginRight: 15 }} />
-                            Accessibility Features
-                        </Button>
-                        <Button
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                alignItems: "center",
-                                cursor: "pointer",
-                                fontSize: "14px",
-                                color: "rgb(255, 255, 255)",
-                                textTransform: "none",
-                                ":hover": {
-                                    textDecoration: "underline"
-                                }
-                            }}
-                        >
-                            <FontAwesomeIcon icon={faBookOpenReader} size="2x" style={{ marginRight: 15 }} />
-                            User Handbook
-                        </Button>
-                    </div>
                 </Toolbar>
             </Root2>
             {/* Mount modal outside of CustomUserMenu. */}
