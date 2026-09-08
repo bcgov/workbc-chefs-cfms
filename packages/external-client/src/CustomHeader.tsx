@@ -41,7 +41,7 @@ export const Header = (props: HeaderProps) => {
                                 underline="none"
                                 aria-label="WorkBC CEP Intake Application"
                             >
-                                <b>Community and Employer Partnership</b>
+                                <b>Community and Employer Partnerships</b>
                             </Link>
                         </Box>
                     </Box>
