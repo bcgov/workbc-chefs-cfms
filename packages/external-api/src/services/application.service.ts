@@ -120,7 +120,7 @@ export const updateApplication = async (id: number, status: string | null, body:
                 workbc_centre: body.submission?.data?.catchmentNoStoreFront
                     ? body.submission?.data?.catchmentNoStoreFront
                     : null,
-                status: body.status ?? (status && status !== "" ? status : null),
+                ...(body.status ? { status: body.status } : status && status !== "" ? { status: status } : {}),
                 updated_by: "system",
                 updated_date: new Date().toISOString(),
                 organization: body.submission?.data?.CEPOrgLegalName,
