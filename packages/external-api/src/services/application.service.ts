@@ -115,12 +115,12 @@ export const updateApplication = async (id: number, status: string | null, body:
             })
             .update({
                 form_confirmation_id: submitted ? body.confirmationId : null, // only store the confirmation ID when the form has been submitted
-                form_submitted_date: submitted ? body.updatedAt ?? body.createdAt : null,
+                form_submitted_date: submitted ? (body.updatedAt ?? body.createdAt) : null,
                 catchmentno: body.submission?.data?.catchmentNo ? Number(body.submission?.data?.catchmentNo) : null,
                 workbc_centre: body.submission?.data?.catchmentNoStoreFront
                     ? body.submission?.data?.catchmentNoStoreFront
                     : null,
-                status: body.status ?? status,
+                status: body.status ?? (status && status !== "" ? status : null),
                 updated_by: "system",
                 updated_date: new Date().toISOString(),
                 organization: body.submission?.data?.CEPOrgLegalName,

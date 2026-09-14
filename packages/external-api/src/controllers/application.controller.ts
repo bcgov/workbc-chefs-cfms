@@ -147,7 +147,7 @@ const updateApplicationFromForm = async (application: any) => {
             const formPass = applicationService.getFormPass(application.form_type)
             if (formID && formPass && application.form_submission_id) {
                 console.log(
-                    `[application.controller] updating submitted application for application id ${application.id} and submission id ${application.form_submission_id}`
+                    `[application.controller] updating application for application id ${application.id} and submission id ${application.form_submission_id}`
                 )
                 const submissionResponse = await formService.getSubmission(
                     formID,
@@ -155,6 +155,9 @@ const updateApplicationFromForm = async (application: any) => {
                     application.form_submission_id
                 )
                 if (submissionResponse.submission.draft === false) {
+                    console.log(
+                        `[application.controller] application was submitted; updating for application id ${application.id} and submission id ${application.form_submission_id}`
+                    )
                     // Application form has been submitted; determine the catchment & storefront, then update the application in the DB //
                     await applicationService.updateApplication(
                         application.id,
@@ -179,12 +182,7 @@ const updateApplicationFromForm = async (application: any) => {
                         })
                 } else if (submissionResponse.submission.draft === true) {
                     // Form is still in draft
-                    await applicationService.updateApplication(
-                        application.id,
-                        "Draft",
-                        submissionResponse.submission,
-                        false
-                    )
+                    await applicationService.updateApplication(application.id, "", submissionResponse.submission, false)
                 }
             }
         }
