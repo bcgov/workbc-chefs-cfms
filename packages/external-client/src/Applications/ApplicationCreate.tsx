@@ -63,7 +63,8 @@ export const ApplicationCreate = () => {
                                 <h2>Let's get started</h2>
                                 <Box paddingLeft="0.75em">
                                     <p>
-                                        In order to submit an application for CEP, you will need{<br />}
+                                        In order to submit an application for Community and Employer Partnerships (CEP),
+                                        you will need{<br />}
                                         the following information:
                                     </p>
                                     <ul>
