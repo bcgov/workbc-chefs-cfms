@@ -22,12 +22,9 @@ import { UserContext } from "../common/contexts/UserContext"
 import DeleteIcon from "@mui/icons-material/Delete"
 
 export const applicationStatusFilters = {
-    All: { label: "All", status: ["Draft", "New", "In Progress", "Completed", "Cancelled"] },
+    All: { label: "All", status: ["Draft", "New"] },
     NotSubmitted: { label: "Draft", status: ["Draft"] },
-    Submitted: { label: "Submitted", status: ["New"] },
-    Processing: { label: "Processing", status: ["In Progress"] },
-    Completed: { label: "Completed", status: ["Completed"] },
-    Cancelled: { label: "Cancelled", status: ["Cancelled"] }
+    Submitted: { label: "Submitted", status: ["New"] }
 }
 
 export const ApplicationList = (props: any) => {
