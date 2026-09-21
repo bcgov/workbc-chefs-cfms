@@ -43,6 +43,9 @@ app.set("trust proxy", "loopback, linklocal, uniquelocal")
 app.use(helmet())
 app.use(keycloak.middleware())
 
+app.get("/", (_req: any, res: any) => {
+    res.sendStatus(200)
+})
 app.use("/applications", keycloak.protect(), applicationRoute)
 app.use("/events", eventRoute)
 app.use("/users", keycloak.protect(), userRoute)
