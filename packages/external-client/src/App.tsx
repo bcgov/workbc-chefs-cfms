@@ -266,7 +266,8 @@ function App() {
                 onLoad: "login-required",
                 pkceMethod: "S256",
                 onTokenExpired: onTokenExpired,
-                checkLoginIframe: false
+                checkLoginIframe: false,
+                responseMode: "query"
             }}
         >
             <UserProvider>
