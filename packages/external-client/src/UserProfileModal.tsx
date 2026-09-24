@@ -210,6 +210,15 @@ const UserProfileModal: React.FC<UserProfileModalProps> = ({ isOpen, onRequestCl
                                         )
                                     ]}
                                 />
+                                <Box sx={{ width: "100%", display: "flex", justifyContent: "right" }}>
+                                    <SaveButton icon={<span />} alwaysEnable sx={SaveButtonStyles} />
+                                    <ModalButton
+                                        text="CANCEL"
+                                        showIcon={false}
+                                        onClick={onRequestClose}
+                                        ariaLabel="Close dialog"
+                                    />
+                                </Box>
                             </Stack>
                         </Stack>
                     </SimpleForm>
