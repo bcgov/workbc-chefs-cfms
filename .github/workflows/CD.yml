@@ -39,6 +39,9 @@ jobs:
         strategy:
             matrix:
                 include:
+                    - imagename: "workbc-chefs-cfms-static"
+                      context: "./packages/static"
+                      env: true
                     - imagename: "workbc-chefs-cfms-external-client"
                       context: "./packages/external-client"
                       env: true
@@ -118,6 +121,8 @@ jobs:
                       REACT_APP_KEYCLOAK_CLIENT_ID=${{ vars.REACT_APP_KEYCLOAK_CLIENT_ID }}
                       REACT_APP_DRAFT_URL=${{ vars.REACT_APP_DRAFT_URL }}
                       REACT_APP_VIEW_URL=${{ vars.REACT_APP_VIEW_URL }}
+                      VITE_APPLICANT_URL=${{ vars.VITE_APPLICANT_URL }}
+                      VITE_ADMIN_URL=${{ vars.VITE_ADMIN_URL }}
                   extra-args: --ulimit nofile=4096:4096
             # Push to specified registry
             - name: Push Static To OpenShift Image repo
