@@ -6,11 +6,11 @@ export const setAbsoluteCEPUrl = (): string => {
         case "Local Dev":
             return "http://localhost:3000/"
         case "TEST":
-            return "https://cep-test2.es.workbc.ca/"
+            return "https://cep-dashboard-test2.es.workbc.ca/"
         case "DEV":
-            return "https://cep-dev1.es.workbc.ca/"
+            return "https://cep-dashboard-dev1.es.workbc.ca/"
         case "PRODUCTION":
-            return "https://cep.es.workbc.ca/"
+            return "https://cep-dashboard.es.workbc.ca/"
         default:
             return "http://localhost:3000/"
     }
