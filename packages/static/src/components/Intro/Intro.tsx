@@ -20,9 +20,9 @@ const Intro = () => {
             <h1>Community and Employer Partnerships</h1>
             <p>
                 Community and Employer Partnerships (CEP) is a part of ELMSD’s WorkBC Employment service system,
-                supporting projects across the BC that deliver employment and skills training services and initiatives
-                that strengthen local labour markets. The program includes four funding streams that support a wide
-                variety of activities ranging from labour market plan development to targeted skills training and work
+                supporting projects across BC that deliver employment and skills training services and initiatives that
+                strengthen local labour markets. The program includes four funding streams that support a wide variety
+                of activities ranging from labour market plan development to targeted skills training and work
                 experience.
             </p>
             <ModalButton
