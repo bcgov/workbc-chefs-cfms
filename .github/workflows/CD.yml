@@ -48,6 +48,12 @@ jobs:
                     - imagename: "workbc-chefs-cfms-external-api"
                       context: "./packages/external-api"
                       env: false
+                    - imagename: "workbc-chefs-cfms-admin-api"
+                      context: "./packages/admin-api"
+                      env: false
+                    - imagename: "workbc-chefs-cfms-admin-client"
+                      context: "./packages/admin-client"
+                      env: true
         steps:
             - name: Extract branch name
               shell: bash
