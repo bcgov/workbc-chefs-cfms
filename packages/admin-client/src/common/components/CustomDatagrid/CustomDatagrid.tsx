@@ -26,13 +26,7 @@ const CustomDatagridBody = <T,>({ showCalculatorButton, ...props }: CustomDatagr
 }
 
 const CustomDatagrid = <T,>({ ariaLabel, showCalculatorButton, setIsLoading, ...props }: CustomDatagridProps<T>) => {
-    const { identity } = useGetIdentity()
-    const [hasBulkActions, setHasBulkActions] = useState<boolean>(false)
     const { isLoading } = useListContext()
-
-    useEffect(() => {
-        setHasBulkActions(identity && identity?.idp && identity.idp === "idir")
-    }, [identity])
 
     useEffect(() => {
         if (setIsLoading && isLoading != null) {
@@ -50,7 +44,7 @@ const CustomDatagrid = <T,>({ ariaLabel, showCalculatorButton, setIsLoading, ...
     return (
         <Datagrid
             {...props}
-            bulkActionButtons={hasBulkActions ? <FormBulkActionButtons /> : false}
+            bulkActionButtons={false}
             sx={DatagridStyles}
             body={<CustomDatagridBody showCalculatorButton={showCalculatorButton} />}
             header={<CustomDatagridHeader />}

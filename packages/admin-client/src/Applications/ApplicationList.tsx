@@ -1,9 +1,8 @@
 import { Box, Chip } from "@mui/material"
-import { FunctionField, Identifier, List, TextField, useRedirect, Loading } from "react-admin"
+import { FunctionField, Identifier, List, TextField, useRedirect, Loading, ExportButton } from "react-admin"
 import { useEffect, useState } from "react"
 import CustomDatagrid from "../common/components/CustomDatagrid/CustomDatagrid"
 import { ListAside } from "../common/components/ListAside/ListAside"
-import { CustomSearchInput } from "../common/components/CustomSearchInput/CustomSearchInput"
 
 export const applicationStatusFilters = {
     All: { label: "All" },
@@ -37,16 +36,6 @@ export const ApplicationList = (props: any) => {
         }
     }
 
-    const applicationFilters = [
-        <CustomSearchInput
-            placeholder="Search applications..."
-            source="search_query"
-            alwaysOn
-            style={{ width: "18em" }}
-            containerStyle={{ transform: "translate(0em, -2.8em)" }}
-        />
-    ]
-
     return (
         <>
             <Box id="main-content-custom" tabIndex={0} aria-label="main content">
@@ -54,9 +43,9 @@ export const ApplicationList = (props: any) => {
                 <Box hidden={!ready} sx={{ paddingTop: "2em" }}>
                     <List
                         {...props}
+                        actions={ExportButton}
                         filter={{ ...statusFilter }}
                         filterDefaultValues={{ ...applicationStatusFilters["All"] }}
-                        filters={applicationFilters}
                         aside={
                             <ListAside
                                 statusFilters={applicationStatusFilters}
@@ -103,7 +92,7 @@ export const ApplicationList = (props: any) => {
                                 render={(record: any) => (
                                     <Box display="flex" width="100%" justifyContent="flex-start">
                                         <Chip
-                                            label={record.status}
+                                            label={record.status === "New" ? "Submitted" : record.status}
                                             size="small"
                                             color={
                                                 record.status === "Draft"
