@@ -7,10 +7,7 @@ import { ListAside } from "../common/components/ListAside/ListAside"
 export const applicationStatusFilters = {
     All: { label: "All" },
     Draft: { label: "Draft", status: "Draft" },
-    New: { label: "New", status: "New" },
-    InProgress: { label: "In Progress", status: "In Progress" },
-    Completed: { label: "Completed", status: "Completed" },
-    Cancelled: { label: "Cancelled", status: "Cancelled" }
+    New: { label: "Submitted", status: "New" }
 }
 
 export const ApplicationList = (props: any) => {
