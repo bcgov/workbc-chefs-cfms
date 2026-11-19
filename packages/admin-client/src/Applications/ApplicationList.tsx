@@ -37,14 +37,8 @@ export const ApplicationList = (props: any) => {
     }, [listIsLoading, listAsideIsLoading])
 
     const handleRowClick = (id: Identifier, resource: string, record: any) => {
-        // In admin client, applications are never in draft.
-        // if (record.form_submission_id) {
-        //     redirect("/ViewForm/applications/" + record.id, "")
-        // } else {
-        //     return "" // rowClick expects a path to be returned
-        // }
         if (record.form_submission_id) {
-            const formURL = process.env.REACT_APP_VIEW_URL + record.form_submission_id
+            const formURL = process.env.REACT_APP_MINISTRY_VIEW_URL + record.form_submission_id
             window.open(formURL, "_blank")?.focus()
             redirect("/", "applications")
         } else {
@@ -127,14 +121,14 @@ export const ApplicationList = (props: any) => {
                                                     record.status === "Draft"
                                                         ? "secondary"
                                                         : record.status === "New"
-                                                        ? "info"
-                                                        : record.status === "In Progress"
-                                                        ? "warning"
-                                                        : record.status === "Completed"
-                                                        ? "success"
-                                                        : record.status === "Cancelled"
-                                                        ? "error"
-                                                        : "primary"
+                                                          ? "info"
+                                                          : record.status === "In Progress"
+                                                            ? "warning"
+                                                            : record.status === "Completed"
+                                                              ? "success"
+                                                              : record.status === "Cancelled"
+                                                                ? "error"
+                                                                : "primary"
                                                 }
                                             />
                                         </Box>

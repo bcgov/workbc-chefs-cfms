@@ -28,9 +28,9 @@ export const Header = (props: HeaderProps) => {
                                 variant="h6"
                                 color="primary.contrastText"
                                 underline="none"
-                                aria-label="WorkBC CEP Intake Application"
+                                aria-label="WorkBC CEP Admin"
                             >
-                                <b>WorkBC CEP Intake</b>
+                                <b>WorkBC CEP Admin</b>
                             </Link>
                         </Box>
                     </Box>

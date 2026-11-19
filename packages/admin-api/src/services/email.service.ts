@@ -13,7 +13,7 @@ export const sendEmail = async (body: string, subject: string, to: string[]) => 
             // cc: [],
             // delayTs: 0,
             encoding: "utf-8",
-            from: "WorkBC CEP Intake <noreply-workbc@gov.bc.ca>",
+            from: "WorkBC CEP Admin <noreply-workbc@gov.bc.ca>",
             priority: "normal",
             subject,
             to,
