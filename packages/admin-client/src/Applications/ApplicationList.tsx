@@ -43,7 +43,7 @@ export const ApplicationList = (props: any) => {
                 <Box hidden={!ready} sx={{ paddingTop: "2em" }}>
                     <List
                         {...props}
-                        actions={ExportButton}
+                        actions={<ExportButton />}
                         filter={{ ...statusFilter }}
                         filterDefaultValues={{ ...applicationStatusFilters["All"] }}
                         aside={
