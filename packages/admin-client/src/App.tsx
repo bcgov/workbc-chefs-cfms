@@ -14,7 +14,6 @@ import Layout from "./Layout"
 import { CatchmentProvider } from "./common/contexts/CatchmentContext/CatchmentContext"
 import "@bcgov/bc-sans/css/BCSans.css"
 import { Route } from "react-router-dom"
-import { ViewForm } from "./Form/ViewForm"
 import { parseCatchments } from "./utils/parseCatchments"
 import Loader from "./common/components/Loader"
 
@@ -25,6 +24,11 @@ const initOptions = {
 }
 
 const keycloak = new Keycloak(initOptions)
+const kcLogin = keycloak.login
+keycloak.login = (options) => {
+    if (options) options.idpHint = "idir"
+    return kcLogin(options)
+}
 
 const onToken = async () => {
     if (keycloak.token && keycloak.refreshToken) {

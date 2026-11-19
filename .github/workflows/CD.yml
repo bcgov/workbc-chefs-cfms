@@ -121,7 +121,7 @@ jobs:
                       VITE_APPLICANT_URL=${{ vars.VITE_APPLICANT_URL }}
                       VITE_ADMIN_URL=${{ vars.VITE_ADMIN_URL }}
                       REACT_APP_ADMIN_API_URL=${{ vars.REACT_APP_ADMIN_API_URL }}
-                      REACT_APP_MINISTRY_URL=${{ vars.REACT_APP_MINISTRY_URL }}
+                      REACT_APP_MINISTRY_VIEW_URL=${{ vars.REACT_APP_MINISTRY_VIEW_URL }}
                   extra-args: --ulimit nofile=4096:4096
             # Push to specified registry
             - name: Push Static To OpenShift Image repo
