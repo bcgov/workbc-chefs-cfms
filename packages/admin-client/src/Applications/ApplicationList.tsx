@@ -1,10 +1,7 @@
-import { Box, Chip, Button, Tooltip } from "@mui/material"
-import { FunctionField, Identifier, List, TextField, useUnselectAll, useRedirect, Loading } from "react-admin"
-import { useContext, useEffect, useState } from "react"
-import CatchmentLabel from "../common/components/CatchmentLabel/CatchmentLabel"
-import { CatchmentContext } from "../common/contexts/CatchmentContext/CatchmentContext"
+import { Box, Chip } from "@mui/material"
+import { FunctionField, Identifier, List, TextField, useRedirect, Loading } from "react-admin"
+import { useEffect, useState } from "react"
 import CustomDatagrid from "../common/components/CustomDatagrid/CustomDatagrid"
-import { ListActions } from "../common/components/ListActions/ListActions"
 import { ListAside } from "../common/components/ListAside/ListAside"
 import { CustomSearchInput } from "../common/components/CustomSearchInput/CustomSearchInput"
 
@@ -18,17 +15,11 @@ export const applicationStatusFilters = {
 }
 
 export const ApplicationList = (props: any) => {
-    const cc = useContext(CatchmentContext)
-    const unselectAll = useUnselectAll("applications")
     const [statusFilter, setStatusFilter] = useState(applicationStatusFilters["All"])
     const redirect = useRedirect()
     const [listIsLoading, setListIsLoading] = useState(true)
     const [listAsideIsLoading, setListAsideIsLoading] = useState(true)
     const [ready, setReady] = useState(false)
-
-    useEffect(() => {
-        unselectAll()
-    }, [cc.catchment])
 
     useEffect(() => {
         if (!listIsLoading && !listAsideIsLoading) {
@@ -60,84 +51,80 @@ export const ApplicationList = (props: any) => {
         <>
             <Box id="main-content-custom" tabIndex={0} aria-label="main content">
                 {!ready && <Loading sx={{ marginTop: 20 }}></Loading>}
-                {cc.catchments.length > 0 && cc.catchment.id >= 0 && (
-                    <Box hidden={!ready} sx={{ paddingTop: "2em" }}>
-                        <CatchmentLabel catchment={cc.catchment.name} />
-                        <List
-                            {...props}
-                            actions={<ListActions catchment={cc.catchment.id} />}
-                            filter={{ ...statusFilter, catchmentno: cc.catchment.id }}
-                            filterDefaultValues={{ ...applicationStatusFilters["All"], catchmentno: cc.catchment.id }}
-                            filters={applicationFilters}
-                            aside={
-                                <ListAside
-                                    statusFilters={applicationStatusFilters}
-                                    statusFilter={statusFilter}
-                                    setStatusFilter={setStatusFilter}
-                                    setIsLoading={setListAsideIsLoading}
-                                />
-                            }
-                            sort={{
-                                field: "form_submitted_date,updated_date,created_date",
-                                order: "DESC"
-                            }}
+                <Box hidden={!ready} sx={{ paddingTop: "2em" }}>
+                    <List
+                        {...props}
+                        filter={{ ...statusFilter }}
+                        filterDefaultValues={{ ...applicationStatusFilters["All"] }}
+                        filters={applicationFilters}
+                        aside={
+                            <ListAside
+                                statusFilters={applicationStatusFilters}
+                                statusFilter={statusFilter}
+                                setStatusFilter={setStatusFilter}
+                                setIsLoading={setListAsideIsLoading}
+                            />
+                        }
+                        sort={{
+                            field: "form_submitted_date,updated_date,created_date",
+                            order: "DESC"
+                        }}
+                    >
+                        <CustomDatagrid
+                            rowClick={handleRowClick}
+                            ariaLabel="applications list"
+                            setIsLoading={setListIsLoading}
                         >
-                            <CustomDatagrid
-                                rowClick={handleRowClick}
-                                ariaLabel="applications list"
-                                setIsLoading={setListIsLoading}
-                            >
-                                <TextField label="Submission ID" source="form_confirmation_id" />
-                                <TextField label="Organization" source="organization" emptyText="-" />
-                                <FunctionField
-                                    label="Submitted"
-                                    sortBy="form_submitted_date,updated_date,created_date"
-                                    sortByOrder="DESC"
-                                    render={(record: any) =>
-                                        record.form_submitted_date
-                                            ? new Date(record.form_submitted_date).toLocaleDateString()
-                                            : "-"
-                                    }
-                                />
-                                <FunctionField
-                                    label="Last Updated"
-                                    sortBy="updated_date,created_date"
-                                    sortByOrder="DESC"
-                                    render={(record: any) =>
-                                        record.form_submitted_date
-                                            ? new Date(record.updated_date).toLocaleDateString()
-                                            : new Date(record.created_date).toLocaleDateString()
-                                    }
-                                />
-                                <FunctionField
-                                    label="Status"
-                                    sortBy="status"
-                                    render={(record: any) => (
-                                        <Box display="flex" width="100%" justifyContent="flex-start">
-                                            <Chip
-                                                label={record.status}
-                                                size="small"
-                                                color={
-                                                    record.status === "Draft"
-                                                        ? "secondary"
-                                                        : record.status === "New"
-                                                          ? "info"
-                                                          : record.status === "In Progress"
-                                                            ? "warning"
-                                                            : record.status === "Completed"
-                                                              ? "success"
-                                                              : record.status === "Cancelled"
-                                                                ? "error"
-                                                                : "primary"
-                                                }
-                                            />
-                                        </Box>
-                                    )}
-                                />
-                            </CustomDatagrid>
-                        </List>
-                    </Box>
-                )}
+                            <TextField label="Submission ID" source="form_confirmation_id" />
+                            <TextField label="Organization" source="organization" emptyText="-" />
+                            <FunctionField
+                                label="Submitted"
+                                sortBy="form_submitted_date,updated_date,created_date"
+                                sortByOrder="DESC"
+                                render={(record: any) =>
+                                    record.form_submitted_date
+                                        ? new Date(record.form_submitted_date).toLocaleDateString()
+                                        : "-"
+                                }
+                            />
+                            <FunctionField
+                                label="Last Updated"
+                                sortBy="updated_date,created_date"
+                                sortByOrder="DESC"
+                                render={(record: any) =>
+                                    record.form_submitted_date
+                                        ? new Date(record.updated_date).toLocaleDateString()
+                                        : new Date(record.created_date).toLocaleDateString()
+                                }
+                            />
+                            <FunctionField
+                                label="Status"
+                                sortBy="status"
+                                render={(record: any) => (
+                                    <Box display="flex" width="100%" justifyContent="flex-start">
+                                        <Chip
+                                            label={record.status}
+                                            size="small"
+                                            color={
+                                                record.status === "Draft"
+                                                    ? "secondary"
+                                                    : record.status === "New"
+                                                      ? "info"
+                                                      : record.status === "In Progress"
+                                                        ? "warning"
+                                                        : record.status === "Completed"
+                                                          ? "success"
+                                                          : record.status === "Cancelled"
+                                                            ? "error"
+                                                            : "primary"
+                                            }
+                                        />
+                                    </Box>
+                                )}
+                            />
+                        </CustomDatagrid>
+                    </List>
+                </Box>
             </Box>
         </>
     )
